@@ -12,64 +12,18 @@
     SizeToContent="Manual"
     Height="693.5"
     Width="1097.5"
-    Background="{x:Null}">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="250"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+    Background="{x:Null}"
+    Loaded="Window_Loaded">
 
-        <!-- Sidebar -->
-        <StackPanel Grid.Column="0" Background="#191C25" VerticalAlignment="Stretch">
-            <!-- Logo -->
-            <Image Source="Resources/logo.png" Height="100" Margin="0,30,0,20" HorizontalAlignment="Center"/>
-            
-            <!-- Menu -->
-            <StackPanel Margin="0,0,0,20">
-                <Button Content="Website" Margin="10,0" Click="Website_Click" Style="{StaticResource MenuButtonStyle}"/>
-                <Button Content="Register" Margin="10,5" Click="Register_Click" Style="{StaticResource MenuButtonStyle}"/>
-                <Button Content="Repair" Margin="10,5" Click="Repair_Click" Style="{StaticResource MenuButtonStyle}"/>
-                <Button Content="Settings" Margin="10,5" Click="Settings_Click" Style="{StaticResource MenuButtonStyle}"/>
-            </StackPanel>
-            
-            <!-- Discord Widget -->
-            <Border Margin="10,10,10,0" Height="250" Background="#23272a" CornerRadius="8">
-                <WebBrowser x:Name="DiscordBrowser" Source="https://discord.com/widget?id=1407071806665523314&theme=dark" />
-            </Border>
-        </StackPanel>
-
-        <!-- Main launcher area -->
-        <Grid Grid.Column="1">
-            <!-- Background -->
-            <Image Source="Resources/background.png" Stretch="Fill"/>
-            
-            <!-- Status & Progress -->
-            <StackPanel VerticalAlignment="Bottom" Margin="50,0,250,70">
-                <TextBlock Name="CurrentFileText" Text="Launcher ready." Foreground="#fff" FontWeight="Bold" Margin="0,0,0,10" FontSize="14"/>
-                <ProgressBar Name="ProgressBar1" Height="10" Margin="0,0,0,10" Minimum="0" Maximum="100" Value="0"/>
-                <TextBlock Name="Progress1Text" Text="0%" Foreground="#fff" FontWeight="Bold"/>
-                <ProgressBar Name="ProgressBar2" Height="10" Margin="0,10,0,10" Minimum="0" Maximum="100" Value="0"/>
-                <TextBlock Name="Progress2Text" Text="0%" Foreground="#fff" FontWeight="Bold"/>
-            </StackPanel>
-
-            <!-- Start button -->
-            <Button Content="START" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,65,50"
-                    Width="160" Height="50" Click="StartGameBtn_Click"
-                    Background="#FFCB8A2A" Foreground="White" FontWeight="Bold"
-                    FontSize="20" BorderThickness="0"
-                    CornerRadius="24"/>
-        </Grid>
-    </Grid>
-
-    <!-- Button style for left menu -->
     <Window.Resources>
+        <!-- Menu Button Style for sidebar -->
         <Style x:Key="MenuButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="#23272a"/>
             <Setter Property="Foreground" Value="#FFD69D20"/>
             <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="FontSize" Value="17"/>
-            <Setter Property="Margin" Value="0,7,0,0"/>
-            <Setter Property="Height" Value="40"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Margin" Value="0,10,0,0"/>
+            <Setter Property="Height" Value="44"/>
             <Setter Property="BorderBrush" Value="#FFD69D20"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="CornerRadius" Value="12"/>
@@ -90,4 +44,89 @@
             </Setter>
         </Style>
     </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="260"/> <!-- Sidebar width -->
+            <ColumnDefinition Width="*"/>   <!-- Main Area -->
+        </Grid.ColumnDefinitions>
+
+        <!-- Sidebar -->
+        <StackPanel Grid.Column="0" Background="#191C25" VerticalAlignment="Stretch">
+            <!-- LOGO at top -->
+            <Image Source="Resources/logo.png"
+                   Height="100"
+                   Margin="0,30,0,40"
+                   HorizontalAlignment="Center"
+                   Stretch="Uniform"/>
+
+            <!-- Vertical Menu Buttons -->
+            <StackPanel>
+                <Button Content="Website" Click="Website_Click" Style="{StaticResource MenuButtonStyle}"/>
+                <Button Content="Register" Click="Register_Click" Style="{StaticResource MenuButtonStyle}"/>
+                <Button Content="Repair" Click="Repair_Click" Style="{StaticResource MenuButtonStyle}"/>
+                <Button Content="Settings" Click="Settings_Click" Style="{StaticResource MenuButtonStyle}"/>
+            </StackPanel>
+
+            <!-- Discord Widget (WebBrowser) -->
+            <Border Margin="12,36,12,16" Height="250" Background="#23272a" CornerRadius="16" BorderBrush="#FFD69D20" BorderThickness="2">
+                <!-- WPF WebBrowser only supports old IE engine unless you use CefSharp; for now, embed as below -->
+                <WindowsFormsHost>
+                    <wf:WebBrowser x:Name="DiscordBrowser"
+                        Source="https://discord.com/widget?id=1407071806665523314&theme=dark"
+                        ScriptErrorsSuppressed="True"/>
+                </WindowsFormsHost>
+            </Border>
+
+            <!-- Language Switcher (preserved from your old design) -->
+            <ComboBox Name="Language"
+                      Width="120"
+                      Height="30"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Bottom"
+                      SelectionChanged="Language_SelectionChanged"
+                      Margin="0,24,0,0">
+                <ComboBoxItem Content="VNE"/>
+                <ComboBoxItem Content="ENG"/>
+            </ComboBox>
+        </StackPanel>
+        
+        <!-- Main Area with background and launcher controls -->
+        <Grid Grid.Column="1">
+            <!-- Themed background image as main game artwork -->
+            <Image Source="Resources/background.png"
+                   Stretch="Fill"
+                   Opacity="1"
+                   Panel.ZIndex="-1"/>
+            
+            <!-- Overlays for progress/status, start button -->
+            <StackPanel VerticalAlignment="Bottom" Margin="64,0,320,80" Background="#80000000">
+                <TextBlock Name="CurrentFileText" Text="Launcher ready." Foreground="#fff" FontWeight="Bold" FontSize="14" Margin="0,0,0,8"/>
+                <StackPanel Orientation="Horizontal">
+                    <ProgressBar Name="ProgressBar1" Height="10" Width="320" Minimum="0" Maximum="100" Value="0" Margin="0,0,12,0"/>
+                    <TextBlock Name="Progress1Text" Text="0%" Foreground="#fff" FontWeight="Bold" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                    <ProgressBar Name="ProgressBar2" Height="10" Width="320" Minimum="0" Maximum="100" Value="0" Margin="0,0,12,0"/>
+                    <TextBlock Name="Progress2Text" Text="0%" Foreground="#fff" FontWeight="Bold" VerticalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+            
+            <!-- START button styled as in your references -->
+            <Button Content="START"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    Margin="0,0,70,50"
+                    Width="170"
+                    Height="56"
+                    FontSize="22"
+                    Foreground="White"
+                    FontWeight="Bold"
+                    Background="#FFCB8A2A"
+                    BorderBrush="#EFA121"
+                    BorderThickness="2"
+                    CornerRadius="28"
+                    Click="StartGameBtn_Click"/>
+        </Grid>
+    </Grid>
 </Window>
