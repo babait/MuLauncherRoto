@@ -1,0 +1,16 @@
+E:\Launcher Decrypt\MUPegasus Launcher\Launcher\bin\Release\Launcher.exe
+E:\Launcher Decrypt\MUPegasus Launcher\Launcher\bin\Release\Launcher.pdb
+E:\Launcher Decrypt\MUPegasus Launcher\Launcher\obj\Release\Launcher.csproj.AssemblyReference.cache
+E:\Launcher Decrypt\MUPegasus Launcher\Launcher\obj\Release\MainWindow.g.cs
+E:\Launcher Decrypt\MUPegasus Launcher\Launcher\obj\Release\Settings.g.cs
+E:\Launcher Decrypt\MUPegasus Launcher\Launcher\obj\Release\App.g.cs
+E:\Launcher Decrypt\MUPegasus Launcher\Launcher\obj\Release\Launcher_Content.g.cs
+E:\Launcher Decrypt\MUPegasus Launcher\Launcher\obj\Release\Launcher_MarkupCompile.cache
+E:\Launcher Decrypt\MUPegasus Launcher\Launcher\obj\Release\Launcher_MarkupCompile.lref
+E:\Launcher Decrypt\MUPegasus Launcher\Launcher\obj\Release\App.baml
+E:\Launcher Decrypt\MUPegasus Launcher\Launcher\obj\Release\MainWindow.baml
+E:\Launcher Decrypt\MUPegasus Launcher\Launcher\obj\Release\Settings.baml
+E:\Launcher Decrypt\MUPegasus Launcher\Launcher\obj\Release\Launcher.g.resources
+E:\Launcher Decrypt\MUPegasus Launcher\Launcher\obj\Release\Launcher.csproj.CoreCompileInputs.cache
+E:\Launcher Decrypt\MUPegasus Launcher\Launcher\obj\Release\Launcher.exe
+E:\Launcher Decrypt\MUPegasus Launcher\Launcher\obj\Release\Launcher.pdb
